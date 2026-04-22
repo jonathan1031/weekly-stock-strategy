@@ -3,19 +3,23 @@ name: Update Stock Web
 on:
   schedule:
     - cron: '0 8 * * 1-5' # 台北時間 16:00
-  workflow_dispatch: # 允許手動執行
+  workflow_dispatch: 
+
+# 新增全局環境變數，強制 Actions 使用 Node.js 24 運行
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # 升級至 v4 (支援 Node 24)
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5 # 升級至 v5 (支援 Node 24)
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # 使用較新的穩定 Python 版本
+          python-version: '3.11'
 
       - name: Install dependencies
         run: pip install yfinance pandas numpy
@@ -24,7 +28,7 @@ jobs:
         run: python app.py
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4 # 升級至 v4
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
