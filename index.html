@@ -6,113 +6,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>策略監控面板</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style> body { padding: 20px; background-color: #f8f9fa; } .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); } </style>
+    <style>
+        body { padding: 20px; background-color: #f0f2f5; font-family: "Microsoft JhengHei", sans-serif; }
+        .container-main { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .logic-card { background-color: #f8f9fa; border-left: 5px solid #333; padding: 20px; margin-bottom: 25px; border-radius: 8px; }
+        .logic-title { font-weight: bold; color: #333; margin-bottom: 8px; font-size: 1.1rem; }
+        .logic-item { font-size: 0.9rem; color: #555; line-height: 1.6; }
+        .table thead { background-color: #212529; color: white; }
+        .badge-logic { font-size: 0.75rem; padding: 2px 6px; border-radius: 5px; background: #dee2e6; color: #495057; font-weight: bold; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="mb-4">📈 策略監控面板</h2>
-        <p class="text-muted">最後更新時間：2026-04-22 08:42:58</p>
-        <table class="table table-bordered align-middle">
-            <thead class="table-dark">
-                <tr><th>名稱</th><th>現價</th><th>當前狀態</th><th>建議停損</th><th>風險空間</th><th>進場評估</th></tr>
-            </thead>
-            <tbody>
+    <div class="container-main container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="m-0">📈 策略監控面板</h2>
+            <span class="text-muted">🕒 更新時間：2026-04-22 09:09:12</span>
+        </div>
+
+        <div class="logic-card shadow-sm">
+            <div class="logic-title">🔍 策略邏輯說明</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="logic-item"><strong>● 當前狀態：</strong><br>
+                        <span class="badge-logic">BUY</span> 趨勢向上(收盤>MA20且MA20上升) ＋ 動能翻正(MACD柱狀體由負轉正)。<br>
+                        <span class="badge-logic">SELL</span> 收盤價跌破 MA10 (週線)，啟動移動鎖利。<br>
+                        <span class="badge-logic">HOLD</span> 股價維持在 MA20 之上且未達賣出條件。
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="logic-item"><strong>● 建議停損：</strong> 以 2 倍 ATR (平均真實波幅) 計算之動態移動停損價位。</div>
+                    <div class="logic-item"><strong>● 風險空間：</strong> (現價 - 停損價) / 現價。代表目前進場預期承擔的原始風險。</div>
+                    <div class="logic-item"><strong>● 進場評估：</strong> 風險空間 &le; 10% 顯示 <span class="text-success fw-bold">✅風險適中</span>；&gt; 10% 顯示 <span class="text-danger fw-bold">⚠️風險過高</span>。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>名稱</th>
+                        <th>股號</th>
+                        <th>現價</th>
+                        <th>當前狀態</th>
+                        <th>建議停損</th>
+                        <th>風險空間</th>
+                        <th>進場評估</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
     <tr class="table-warning">
-        <td>元大台灣50</td><td>86.35</td><td>持股續抱 (HOLD)</td>
-        <td>78.69</td><td>8.9%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">元大台灣50</td>
+        <td>0050.TW</td>
+        <td>86.35</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>78.69</td>
+        <td>8.9%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-warning">
-        <td>台積電</td><td>2050.00</td><td>持股續抱 (HOLD)</td>
-        <td>1848.25</td><td>9.8%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">台積電</td>
+        <td>2330.TW</td>
+        <td>2050.00</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>1848.25</td>
+        <td>9.8%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-warning">
-        <td>富邦台50</td><td>199.95</td><td>持股續抱 (HOLD)</td>
-        <td>182.56</td><td>8.7%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">富邦台50</td>
+        <td>006208.TW</td>
+        <td>199.95</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>182.56</td>
+        <td>8.7%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-warning">
-        <td>鴻海</td><td>221.00</td><td>持股續抱 (HOLD)</td>
-        <td>191.50</td><td>13.3%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">鴻海</td>
+        <td>2317.TW</td>
+        <td>221.00</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>191.50</td>
+        <td>13.3%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>中華電</td><td>136.50</td><td>持股續抱 (HOLD)</td>
-        <td>131.86</td><td>3.4%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">中華電</td>
+        <td>2412.TW</td>
+        <td>136.50</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>131.86</td>
+        <td>3.4%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-warning">
-        <td>台達電</td><td>2015.00</td><td>持股續抱 (HOLD)</td>
-        <td>1682.14</td><td>16.5%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">台達電</td>
+        <td>2308.TW</td>
+        <td>2015.00</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>1682.14</td>
+        <td>16.5%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>元大臺灣ESG永續</td><td>73.20</td><td>持股續抱 (HOLD)</td>
-        <td>66.79</td><td>8.8%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">元大臺灣ESG永續</td>
+        <td>00850.TW</td>
+        <td>73.20</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>66.79</td>
+        <td>8.8%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-danger">
-        <td>聯發科</td><td>2295.00</td><td>★ 買入點 (BUY)</td>
-        <td>1921.43</td><td>16.3%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">聯發科</td>
+        <td>2454.TW</td>
+        <td>2295.00</td>
+        <td class="fw-bold">★ 買入點 (BUY)</td>
+        <td>1921.43</td>
+        <td>16.3%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-success">
-        <td>卜蜂</td><td>141.00</td><td>✘ 賣出點 (SELL)</td>
-        <td>127.29</td><td>9.7%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">卜蜂</td>
+        <td>1215.TW</td>
+        <td>141.00</td>
+        <td class="fw-bold">✘ 賣出點 (SELL)</td>
+        <td>127.29</td>
+        <td>9.7%</td>
+        <td>-</td>
     </tr>
     
     <tr class="table-warning">
-        <td>富邦科技</td><td>50.25</td><td>持股續抱 (HOLD)</td>
-        <td>45.64</td><td>9.2%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">富邦科技</td>
+        <td>0052.TW</td>
+        <td>50.25</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>45.64</td>
+        <td>9.2%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-warning">
-        <td>元大金</td><td>50.10</td><td>持股續抱 (HOLD)</td>
-        <td>44.75</td><td>10.7%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">元大金</td>
+        <td>2885.TW</td>
+        <td>50.10</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>44.75</td>
+        <td>10.7%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>臺鹽</td><td>32.15</td><td>持股續抱 (HOLD)</td>
-        <td>31.46</td><td>2.2%</td><td>✅ 風險適中</td>
+        <td class="fw-bold">臺鹽</td>
+        <td>1737.TW</td>
+        <td>32.15</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>31.46</td>
+        <td>2.2%</td>
+        <td>✅ 風險適中</td>
     </tr>
     
     <tr class="table-success">
-        <td>中鋼</td><td>19.55</td><td>✘ 賣出點 (SELL)</td>
-        <td>17.49</td><td>10.6%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">中鋼</td>
+        <td>2002.TW</td>
+        <td>19.55</td>
+        <td class="fw-bold">✘ 賣出點 (SELL)</td>
+        <td>17.49</td>
+        <td>10.6%</td>
+        <td>-</td>
     </tr>
     
     <tr class="table-warning">
-        <td>智邦</td><td>2200.00</td><td>持股續抱 (HOLD)</td>
-        <td>1815.71</td><td>17.5%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">智邦</td>
+        <td>2345.TW</td>
+        <td>2200.00</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>1815.71</td>
+        <td>17.5%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>明泰</td><td>40.00</td><td>持股續抱 (HOLD)</td>
-        <td>32.06</td><td>19.9%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">明泰</td>
+        <td>3380.TW</td>
+        <td>40.00</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>32.06</td>
+        <td>19.9%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>宏碁</td><td>28.30</td><td>持股續抱 (HOLD)</td>
-        <td>25.20</td><td>11.0%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">宏碁</td>
+        <td>2353.TW</td>
+        <td>28.30</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>25.20</td>
+        <td>11.0%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>富采</td><td>73.30</td><td>持股續抱 (HOLD)</td>
-        <td>58.25</td><td>20.5%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">富采</td>
+        <td>3714.TW</td>
+        <td>73.30</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>58.25</td>
+        <td>20.5%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>華碩</td><td>609.00</td><td>持股續抱 (HOLD)</td>
-        <td>547.21</td><td>10.1%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">華碩</td>
+        <td>2357.TW</td>
+        <td>609.00</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>547.21</td>
+        <td>10.1%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
     
     <tr class="table-warning">
-        <td>和碩</td><td>84.70</td><td>持股續抱 (HOLD)</td>
-        <td>75.89</td><td>10.4%</td><td>⚠️ 風險過高</td>
+        <td class="fw-bold">和碩</td>
+        <td>4938.TW</td>
+        <td>84.70</td>
+        <td class="fw-bold">持股續抱 (HOLD)</td>
+        <td>75.89</td>
+        <td>10.4%</td>
+        <td>⚠️ 風險過高</td>
     </tr>
-    </tbody>
-        </table>
+    
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-3 text-end text-muted" style="font-size: 0.8rem;">
+            * 本工具僅供策略參考，不構成任何投資建議。資料來源：Yahoo Finance
+        </div>
     </div>
 </body>
 </html>
