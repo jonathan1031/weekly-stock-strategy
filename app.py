@@ -99,8 +99,14 @@ for t in tickers:
 
 df_final = pd.DataFrame(results)
 
-# --- 3. 先定義時間與表格內容 (修正 NameError 關鍵點) ---
-update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# --- 3. 先定義時間與表格內容 (修正時區為 GMT+8) ---
+from datetime import datetime, timedelta, timezone
+
+# 建立 GMT+8 時區
+tz_taiwan = timezone(timedelta(hours=8))
+# 取得目前 GMT+8 的時間
+update_time = datetime.now(tz_taiwan).strftime("%Y-%m-%d %H:%M:%S")
+
 
 html_rows = ""
 for _, row in df_final.iterrows():
